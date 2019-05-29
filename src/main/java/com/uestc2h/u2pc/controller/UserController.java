@@ -17,39 +17,22 @@ public class UserController {
     private UserService userService;
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public UserDTO login(@RequestParam("email") String email, @RequestParam(value = "password") String password){
+    public UserDTO login(@RequestParam("email") String email, @RequestParam(value = "password") String password,HttpSession session,HttpServletResponse response){
         UserDTO userDTO = new UserDTO();
         userDTO.setEmail(email);
         userDTO.setPassword(password);
 
         UserDTO result = userService.login(userDTO);
-//        if(result != null && result.getUserId() > 0){
-//            session.setAttribute("user", userDTO);
-//
-//            if(pwdcookie != null){
-//
-//                Cookie cId = new Cookie("userId", result.getUserId().toString());
-//
-//                cId.setMaxAge(60*60);
-//
-//                cId.setPath("/");
-//
-//                response.addCookie(cId);
-//
-//            }else {
-//                Cookie cId = new Cookie("userId", result.getUserId().toString());
-//
-//                cId.setMaxAge(0);
-//
-//                cId.setPath("/");
-//
-//                response.addCookie(cId);
-//            }
-//
-//            session.setAttribute("p", pwdcookie);
-//            session.setAttribute("Id", result.getUserId());
-//            return result;
-//        }
+        if(result != null && result.getUserId() > 0){
+            session.setAttribute("user", userDTO);
+
+            Cookie cId = new Cookie("userId", result.getUserId().toString());
+
+            cId.setMaxAge(0);
+            cId.setPath("/");
+
+            response.addCookie(cId);
+        }
 
         return result;
     }
