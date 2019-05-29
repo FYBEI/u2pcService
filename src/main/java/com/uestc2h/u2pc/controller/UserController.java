@@ -6,20 +6,51 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-@Controller
-@ResponseBody
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+@RestController
 public class UserController {
 
     @Autowired
     private UserService userService;
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public Long login(@RequestParam("email") String email, @RequestParam("password") String password){
+    public UserDTO login(@RequestParam("email") String email, @RequestParam(value = "password") String password){
         UserDTO userDTO = new UserDTO();
         userDTO.setEmail(email);
         userDTO.setPassword(password);
-        Long userId = userService.login(userDTO);
 
-        return userId;
+        UserDTO result = userService.login(userDTO);
+//        if(result != null && result.getUserId() > 0){
+//            session.setAttribute("user", userDTO);
+//
+//            if(pwdcookie != null){
+//
+//                Cookie cId = new Cookie("userId", result.getUserId().toString());
+//
+//                cId.setMaxAge(60*60);
+//
+//                cId.setPath("/");
+//
+//                response.addCookie(cId);
+//
+//            }else {
+//                Cookie cId = new Cookie("userId", result.getUserId().toString());
+//
+//                cId.setMaxAge(0);
+//
+//                cId.setPath("/");
+//
+//                response.addCookie(cId);
+//            }
+//
+//            session.setAttribute("p", pwdcookie);
+//            session.setAttribute("Id", result.getUserId());
+//            return result;
+//        }
+
+        return result;
     }
 }

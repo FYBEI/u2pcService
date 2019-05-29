@@ -4,7 +4,7 @@ import com.uestc2h.u2pc.controller.DTO.UserDTO;
 
 public interface UserService {
 
-    Long login(UserDTO user);
+    UserDTO login(UserDTO user);
 
     int register(UserDTO user);
 
