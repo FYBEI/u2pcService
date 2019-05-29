@@ -1,40 +1,40 @@
-package com.uestc2h.u2pc.controller.DO;
+package com.uestc2h.u2pc.controller.DTO;
 
-public class UserDO {
+public class UserDTO {
     /**
      * userId
      */
-    Long userId;
+    private Long userId;
 
     /**
      * userName
      */
-    String userName;
+    private String userName;
 
     /**
      * password
      */
-    String password;
+    private String password;
 
     /**
      * sign
      */
-    String sign;
+    private String sign;
 
     /**
      * phone
      */
-    String phone;
+    private String phone;
 
     /**
      * email同时也是登录账号
      */
-    String email;
+    private String email;
 
     /**
      * headImg
      */
-    PictureDO img;
+    private PictureDTO img;
 
     public Long getUserId() {
         return userId;
@@ -84,11 +84,11 @@ public class UserDO {
         this.email = email;
     }
 
-    public PictureDO getImg() {
+    public PictureDTO getImg() {
         return img;
     }
 
-    public void setImg(PictureDO img) {
+    public void setImg(PictureDTO img) {
         this.img = img;
     }
 }

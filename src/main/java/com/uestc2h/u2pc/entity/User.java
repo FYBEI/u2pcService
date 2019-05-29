@@ -4,37 +4,37 @@ public class User {
     /**
      * userId
      */
-    Long userId;
+    private Long userId;
 
     /**
      * userName
      */
-    String userName;
+    private String userName;
 
     /**
      * password
      */
-    String password;
+    private String password;
 
     /**
      * sign
      */
-    String sign;
+    private String sign;
 
     /**
      * phone
      */
-    String phone;
+    private String phone;
 
     /**
      * email同时也是登录账号
      */
-    String email;
+    private String email;
 
     /**
      * headImg
      */
-    Picture img;
+    private Picture img;
 
     public Long getUserId() {
         return userId;

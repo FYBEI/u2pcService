@@ -1,40 +1,40 @@
-package com.uestc2h.u2pc.mapper.DTO;
+package com.uestc2h.u2pc.mapper.DO;
 
-public class UserDTO {
+public class UserDO {
     /**
      * userId
      */
-    Long userId;
+    private Long userId;
 
     /**
      * userName
      */
-    String userName;
+    private String userName;
 
     /**
      * password
      */
-    String password;
+    private String password;
 
     /**
      * sign
      */
-    String sign;
+    private String sign;
 
     /**
      * phone
      */
-    String phone;
+    private String phone;
 
     /**
      * email同时也是登录账号
      */
-    String email;
+    private String email;
 
     /**
      * headImg
      */
-    PictureDTO img;
+    private PictureDO img;
 
     public Long getUserId() {
         return userId;
@@ -84,11 +84,11 @@ public class UserDTO {
         this.email = email;
     }
 
-    public PictureDTO getImg() {
+    public PictureDO getImg() {
         return img;
     }
 
-    public void setImg(PictureDTO img) {
+    public void setImg(PictureDO img) {
         this.img = img;
     }
 }

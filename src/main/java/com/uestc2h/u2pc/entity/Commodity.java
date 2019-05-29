@@ -7,27 +7,32 @@ public class Commodity {
     /**
      * Id
      */
-    Long id;
+    private Long id;
 
     /**
      * value
      */
-    String name;
+    private String name;
 
     /**
      * price
      */
-    float price;
+    private float price;
 
     /**
      * intro
      */
-    String intro;
+    private String intro;
 
     /**
      * userId,物主的Id
      */
-    Long userId;
+    private Long userId;
+
+    /**
+     * sell
+     */
+    private boolean sell;
 
     /**
      * kind
@@ -72,7 +77,7 @@ public class Commodity {
     /**
      * Pictures
      */
-    List<Picture> pictures;
+    private List<Picture> pictures;
 
     public Long getId() {
         return id;
@@ -120,5 +125,13 @@ public class Commodity {
 
     public void setPictures(List<Picture> pictures) {
         this.pictures = pictures;
+    }
+
+    public boolean isSell() {
+        return sell;
+    }
+
+    public void setSell(boolean sell) {
+        this.sell = sell;
     }
 }

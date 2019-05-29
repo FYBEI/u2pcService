@@ -1,9 +1,8 @@
-package com.uestc2h.u2pc.entity;
+package com.uestc2h.u2pc.mapper.DO;
 
 import java.io.File;
 
-public class Picture {
-
+public class PictureDO {
     /**
      * imgId
      */
@@ -55,4 +54,5 @@ public class Picture {
     public void setId(Long id) {
         this.id = id;
     }
+
 }

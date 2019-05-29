@@ -1,4 +1,4 @@
-package com.uestc2h.u2pc.mapper.DTO;
+package com.uestc2h.u2pc.controller.DTO;
 
 import java.util.List;
 
@@ -6,27 +6,32 @@ public class CommodityDTO {
     /**
      * Id
      */
-    Long id;
+    private Long id;
 
     /**
      * value
      */
-    String name;
+    private String name;
 
     /**
      * price
      */
-    float price;
+    private float price;
 
     /**
      * intro
      */
-    String intro;
+    private String intro;
 
     /**
      * userId,物主的Id
      */
-    Long userId;
+    private Long userId;
+
+    /**
+     * sell
+     */
+    private boolean sell;
 
     /**
      * kind
@@ -71,7 +76,7 @@ public class CommodityDTO {
     /**
      * Pictures
      */
-    List<PictureDTO> pictures;
+    private List<PictureDTO> pictures;
 
     public Long getId() {
         return id;
@@ -119,5 +124,13 @@ public class CommodityDTO {
 
     public void setPictures(List<PictureDTO> pictures) {
         this.pictures = pictures;
+    }
+
+    public boolean isSell() {
+        return sell;
+    }
+
+    public void setSell(boolean sell) {
+        this.sell = sell;
     }
 }

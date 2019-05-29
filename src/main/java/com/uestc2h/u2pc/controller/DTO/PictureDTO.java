@@ -1,9 +1,8 @@
-package com.uestc2h.u2pc.entity;
+package com.uestc2h.u2pc.controller.DTO;
 
 import java.io.File;
 
-public class Picture {
-
+public class PictureDTO {
     /**
      * imgId
      */
@@ -55,4 +54,5 @@ public class Picture {
     public void setId(Long id) {
         this.id = id;
     }
+
 }
