@@ -7,13 +7,13 @@ import org.springframework.stereotype.Repository;
 @Mapper
 public interface UserMapper{
 
-    @Select("select * from user where email=#{email} and password=#{password}")
+    @Select("select * from user where email=#{email} and password=#{password};")
     UserDO login(UserDO user);
 
-    @Insert("insert into user(email, password) values (#{email}, #{password})")
+    @Insert("insert into user(email, password) values (#{email}, #{password});")
     @Options(useGeneratedKeys=true,keyProperty="userId")
     int register(UserDO user);
 
-    @Update("update user set username=#{username}, sign=#{sign}, phone=#{phone}")
+    @Update("update user set username=#{username}, sign=#{sign}, phone=#{phone};")
     int setInfo(UserDO user);
 }

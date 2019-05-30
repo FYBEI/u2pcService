@@ -16,7 +16,7 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
     public UserDTO login(@RequestParam("email") String email, @RequestParam(value = "password") String password,HttpSession session,HttpServletResponse response){
         UserDTO userDTO = new UserDTO();
         userDTO.setEmail(email);
@@ -32,8 +32,34 @@ public class UserController {
             cId.setPath("/");
 
             response.addCookie(cId);
+
         }
 
         return result;
+    }
+
+    @RequestMapping(value = "/register", method = RequestMethod.POST)
+    public boolean register(@RequestParam("email") String email, @RequestParam(value = "password") String password){
+        UserDTO userDTO = new UserDTO();
+        userDTO.setEmail(email);
+        userDTO.setPassword(password);
+
+        int result = userService.register(userDTO);
+
+        if (result > 0){
+            return true;
+        }else {
+            return false;
+        }
+
+    }
+
+    @RequestMapping(value = "/setInfo", method = RequestMethod.POST)
+    public boolean setInfo(UserDTO userDTO){
+        int result = userService.setInfo(userDTO);
+        if (result > 0)
+            return true;
+        else
+            return false;
     }
 }

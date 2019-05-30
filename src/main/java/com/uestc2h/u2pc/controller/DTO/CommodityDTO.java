@@ -36,42 +36,7 @@ public class CommodityDTO {
     /**
      * kind
      */
-    enum Kind{
-        SHbook("二手书", 1), Live("生活用品", 2), Coat("服饰", 3), Digital("数码", 4), Learn("学习", 5), Sports("运动", 6);
-
-        private String value;
-        private int key;
-
-        Kind(String value, int key) {
-            this.value = value;
-            this.key = key;
-        }
-
-        public static String getValue(int key){
-            for (Kind k : Kind.values()) {
-                if (k.getKey() == key) {
-                    return k.value;
-                }
-            }
-            return null;
-        }
-
-        public String getValue() {
-            return value;
-        }
-
-        public void setValue(String value) {
-            this.value = value;
-        }
-
-        public int getKey() {
-            return key;
-        }
-
-        public void setKey(int key) {
-            this.key = key;
-        }
-    }
+    String kind;
 
     /**
      * Pictures
@@ -132,5 +97,13 @@ public class CommodityDTO {
 
     public void setSell(boolean sell) {
         this.sell = sell;
+    }
+
+    public String getKind() {
+        return kind;
+    }
+
+    public void setKind(String kind) {
+        this.kind = kind;
     }
 }
