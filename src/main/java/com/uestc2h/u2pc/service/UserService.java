@@ -6,7 +6,7 @@ public interface UserService {
 
     UserDTO login(UserDTO user);
 
-    int register(UserDTO user);
+    Long register(UserDTO user);
 
     int setInfo(UserDTO user);
 }

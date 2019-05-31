@@ -48,10 +48,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public int register(UserDTO user) {
+    public Long register(UserDTO user) {
         UserDO userDO = changeDTO(user);
-        int num = userMapper.register(userDO);
-        return num;
+        userMapper.register(userDO);
+
+        Long userId = userDO.getUserId();
+        return userId;
     }
 
     @Override

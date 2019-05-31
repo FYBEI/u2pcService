@@ -16,7 +16,7 @@ import java.util.List;
 public class PictureServiceImpl implements PictureService {
 
     @Autowired
-    PictureMapper pictureMapper;
+    private PictureMapper pictureMapper;
 
     PictureDTO changeDO(PictureDO pictureDO){
         PictureDTO pictureDTO = new PictureDTO();
@@ -55,6 +55,8 @@ public class PictureServiceImpl implements PictureService {
 
         for (PictureDO obj : doList){
             PictureDTO pictureDTO = changeDO(obj);
+            String name = "http://localhost:8070/myImg/commodityImg/" + pictureDTO.getName();
+            pictureDTO.setName(name);
             dtoList.add(pictureDTO);
         }
 
