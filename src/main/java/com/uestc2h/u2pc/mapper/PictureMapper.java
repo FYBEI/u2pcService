@@ -23,7 +23,7 @@ public interface PictureMapper {
     @Update("update headimg set name=#{name}, size=#{size} where id=#{id};")
     int setHeadImg(PictureDO pictureDO);
 
-    @Insert("isert into commodityimg (name, size, id) values (#{name}, #{size}, #{id});")
+    @Insert("insert into commodityimg (name, size, id) values (#{name}, #{size}, #{id});")
     int pubCommodityImg(PictureDO pictureDO);
 
     @Update("delete from headimg where id=#{userId};")
