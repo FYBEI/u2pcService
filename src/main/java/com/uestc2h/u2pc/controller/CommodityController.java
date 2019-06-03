@@ -89,7 +89,8 @@ public class CommodityController {
 
         int num = 0;
         for (PictureDTO pictureDTO : pictureDTOS){
-            String fileName = "D:\\uestc2hService\\u2pcService\\src\\main\\resources\\myImg\\commodityImg\\" + pictureDTO.getName();
+            String[] tmp = pictureDTO.getName().split("/");
+            String fileName = "D:\\uestc2hService\\u2pcService\\src\\main\\resources\\myImg\\commodityImg\\" + tmp[tmp.length-1];
             File file = new File(fileName);
 
             if (file.exists() && file.isFile()){
@@ -141,6 +142,12 @@ public class CommodityController {
     @RequestMapping(value = "/usersell", method = RequestMethod.GET)
     public List<CommodityDTO> getUserSell(Long userId, boolean sell){
         List<CommodityDTO> list = commodityService.getUserSell(userId, sell);
+
+        for (CommodityDTO obj:list){
+            Long commodityId = obj.getId();
+            List<PictureDTO> pictures = pictureService.getCommodityImgs(commodityId);
+            obj.setPictures(pictures);
+        }
 
         return list;
     }

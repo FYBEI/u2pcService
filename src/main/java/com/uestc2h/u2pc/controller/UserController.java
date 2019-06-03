@@ -83,4 +83,15 @@ public class UserController {
         else
             return false;
     }
+
+    @RequestMapping(value = "/getUserById", method = RequestMethod.GET)
+    public UserDTO getById(Long userId){
+        UserDTO userDTO = userService.getUserById(userId);
+
+        if(userDTO != null){
+            PictureDTO pictureDTO = pictureService.getHeadImg(userId);
+            userDTO.setImg(pictureDTO);
+        }
+        return userDTO;
+    }
 }

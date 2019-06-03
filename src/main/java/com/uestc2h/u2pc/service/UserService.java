@@ -9,4 +9,6 @@ public interface UserService {
     Long register(UserDTO user);
 
     int setInfo(UserDTO user);
+
+    UserDTO getUserById(Long userId);
 }

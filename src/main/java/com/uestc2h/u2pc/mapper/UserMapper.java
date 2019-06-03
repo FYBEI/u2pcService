@@ -16,4 +16,7 @@ public interface UserMapper{
 
     @Update("update user set username=#{userName}, sign=#{sign}, phone=#{phone} where userId=#{userId};")
     int setInfo(UserDO user);
+
+    @Select("select * from user where userId=#{userId};")
+    UserDO getUserById(Long userId);
 }

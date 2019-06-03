@@ -62,4 +62,12 @@ public class UserServiceImpl implements UserService {
         int num = userMapper.setInfo(userDO);
         return num;
     }
+
+    @Override
+    public UserDTO getUserById(Long userId){
+        UserDO userDO = userMapper.getUserById(userId);
+        UserDTO userDTO = changeDO(userDO);
+
+        return userDTO;
+    }
 }
