@@ -67,7 +67,7 @@ public class PictureServiceImpl implements PictureService {
     public Long register(Long userId) {
         PictureDO pictureDO = new PictureDO();
 
-        String defaultname = "../assets/head.jpg";
+        String defaultname = "http://localhost:8070/myImg/headImg/head.jpg";
         Long size = Long.valueOf(0);
 
         pictureDO.setId(userId);

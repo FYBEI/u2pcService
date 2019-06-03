@@ -14,6 +14,6 @@ public interface UserMapper{
     @Options(useGeneratedKeys=true,keyProperty="userId")
     int register(UserDO user);
 
-    @Update("update user set username=#{username}, sign=#{sign}, phone=#{phone};")
+    @Update("update user set username=#{userName}, sign=#{sign}, phone=#{phone} where userId=#{userId};")
     int setInfo(UserDO user);
 }

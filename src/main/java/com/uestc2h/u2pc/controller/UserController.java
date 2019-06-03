@@ -1,5 +1,6 @@
 package com.uestc2h.u2pc.controller;
 
+import com.uestc2h.u2pc.controller.DTO.PictureDTO;
 import com.uestc2h.u2pc.controller.DTO.UserDTO;
 import com.uestc2h.u2pc.service.PictureService;
 import com.uestc2h.u2pc.service.UserService;
@@ -25,6 +26,10 @@ public class UserController {
         userDTO.setPassword(password);
 
         UserDTO result = userService.login(userDTO);
+
+        PictureDTO picture = pictureService.getHeadImg(result.getUserId());
+        result.setImg(picture);
+
         if(result != null && result.getUserId() > 0){
             if(pwdcokie!=null) {
                 Cookie cId = new Cookie("userId", result.getUserId().toString());
@@ -57,6 +62,7 @@ public class UserController {
         UserDTO userDTO = new UserDTO();
         userDTO.setEmail(email);
         userDTO.setPassword(password);
+        userDTO.setUserName("用户名");
 
         Long userId = userService.register(userDTO);
 
@@ -69,8 +75,9 @@ public class UserController {
     }
 
     @RequestMapping(value = "/setInfo", method = RequestMethod.POST)
-    public boolean setInfo(UserDTO userDTO){
-        int result = userService.setInfo(userDTO);
+    public boolean setInfo(UserDTO user){
+
+        int result = userService.setInfo(user);
         if (result > 0)
             return true;
         else
