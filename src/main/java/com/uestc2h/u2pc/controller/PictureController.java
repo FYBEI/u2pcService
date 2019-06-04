@@ -8,9 +8,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -89,6 +92,50 @@ public class PictureController {
         }
 
         return "file delete fail";
+    }
+
+    @RequestMapping(value = "/pubImgs", method = RequestMethod.POST)
+    public String pubImgs(HttpServletRequest request, Long commodityId){
+        List<MultipartFile> files = ((MultipartHttpServletRequest) request).getFiles("file");
+        String filePath = "D:\\uestc2hService\\u2pcService\\src\\main\\resources\\myImg\\commodityImg\\";
+
+        for (int i = 0; i < files.size(); i++) {
+            MultipartFile file = files.get(i);
+            if (file.isEmpty()) {
+                return "upload the " + (i++) + " file fail";
+            }
+            String fileName = file.getOriginalFilename();
+
+            File dest = new File(filePath + fileName);
+            try {
+                file.transferTo(dest);
+            } catch (IOException e) {
+                e.printStackTrace();
+                return "upload the " + (i++) + " file fail";
+            }
+        }
+
+        List<PictureDTO> pictureDTOS = new ArrayList<>();
+
+        for (MultipartFile file : files){
+            PictureDTO pictureDTO = new PictureDTO();
+
+            String fileName = file.getOriginalFilename();
+            Long size = file.getSize();
+
+            pictureDTO.setName(fileName);
+            pictureDTO.setSize(size);
+            pictureDTO.setId(commodityId);
+
+            pictureDTOS.add(pictureDTO);
+        }
+
+        int result = pictureService.pubCommodityImg(pictureDTOS);
+
+        if (result > 0)
+            return "upload success";
+        else
+            return "upload fail";
     }
 
 }

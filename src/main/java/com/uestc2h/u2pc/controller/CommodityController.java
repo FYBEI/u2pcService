@@ -26,54 +26,10 @@ public class CommodityController {
     private PictureService pictureService;
 
     @RequestMapping(value = "/pub", method = RequestMethod.POST)
-    public String pub(HttpServletRequest request, CommodityDTO commodityDTO){
+    public Long pub(CommodityDTO commodityDTO){
         Long commodityId = commodityService.pub(commodityDTO);
 
-        if (commodityId <= 0){
-            return "上传失败";
-        }
-
-        List<MultipartFile> files = ((MultipartHttpServletRequest) request).getFiles("file");
-        String filePath = "D:\\uestc2hService\\u2pcService\\src\\main\\resources\\myImg\\commodityImg\\";
-
-        for (int i = 0; i < files.size(); i++) {
-            MultipartFile file = files.get(i);
-            if (file.isEmpty()) {
-                return "upload the " + (i++) + " file fail";
-            }
-            String fileName = file.getOriginalFilename();
-
-            File dest = new File(filePath + fileName);
-            try {
-                file.transferTo(dest);
-            } catch (IOException e) {
-                e.printStackTrace();
-                return "upload the " + (i++) + " file fail";
-            }
-        }
-
-        List<PictureDTO> pictureDTOS = new ArrayList<>();
-
-        for (MultipartFile file : files){
-            PictureDTO pictureDTO = new PictureDTO();
-
-            String fileName = file.getOriginalFilename();
-            Long size = file.getSize();
-
-            pictureDTO.setName(fileName);
-            pictureDTO.setSize(size);
-            pictureDTO.setId(commodityId);
-
-            pictureDTOS.add(pictureDTO);
-        }
-
-        int result = pictureService.pubCommodityImg(pictureDTOS);
-
-        if (result > 0)
-            return "upload success";
-        else
-            return "upload fail";
-
+        return commodityId;
     };
 
     @RequestMapping(value = "/delete", method = RequestMethod.POST)
@@ -135,6 +91,11 @@ public class CommodityController {
     @RequestMapping(value = "/kind", method = RequestMethod.GET)
     public List<CommodityDTO> getCommoditiesByKind(String kind){
         List<CommodityDTO> list = commodityService.getCommoditiesByKind(kind);
+
+        for (CommodityDTO commodityDTO:list){
+            List<PictureDTO> pictureList = pictureService.getCommodityImgs(commodityDTO.getId());
+            commodityDTO.setPictures(pictureList);
+        }
 
         return list;
     }
